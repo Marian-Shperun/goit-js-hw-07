@@ -1,21 +1,26 @@
 import { galleryItems } from "./gallery-items.js";
 
-console.log(galleryItems);
+console.log("galleryItems");
 
 const containerGallery = document.querySelector("div.gallery");
 
 galleryItems.map((item) => {
+  const galleryItem = document.createElement("div");
+  galleryItem.classList.add("gallery__item");
+
   const linkEl = document.createElement("a");
   linkEl.classList.add("gallery__link");
   linkEl.href = item.original;
+
   const imgEl = document.createElement("img");
   imgEl.classList.add("gallery__image");
   imgEl.src = item.preview;
   imgEl.dataset.source = item.original;
   imgEl.alt = item.description;
 
+  galleryItem.append(linkEl);
   linkEl.append(imgEl);
-  containerGallery.append(linkEl);
+  containerGallery.append(galleryItem);
 });
 
 console.log(containerGallery);
@@ -41,7 +46,7 @@ function onImgClick(event) {
   // закриття модалки через клавіатуру
   containerGallery.addEventListener("keydown", (event) => {
     if (event.code === "Escape") {
-      instance.close()
+      instance.close();
     }
   });
 }
